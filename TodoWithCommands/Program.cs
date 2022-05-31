@@ -3,7 +3,7 @@ using TodoWithCommands.Commands;
 using TodoWithCommands.Model;
 
 var todo = new TodoManager();
-var commands = new ICommand?[]
+var commands = new Command?[]
 {
     new AddTodoItemCommand(todo),
     new DeleteTodoItemCommand(todo),

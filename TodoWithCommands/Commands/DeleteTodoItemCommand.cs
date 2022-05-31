@@ -1,27 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TodoWithCommands.Model;
+﻿using TodoWithCommands.Model;
 
 namespace TodoWithCommands.Commands
 {
-    internal class DeleteTodoItemCommand : ICommand
+    internal class DeleteTodoItemCommand : Command
     {
         private readonly TodoManager _todo;
-        public int No { get; } = 2;
-        public string Description => $"{No} - slett";
+
         public DeleteTodoItemCommand(TodoManager todo)
+        : base(2, "slett")
         {
             _todo = todo;
         }
 
-        public void Run()
+        public override void Run()
         {
-            Console.Write("Hvilket nr vil du slette? ");
-            var noStr = Console.ReadLine();
-            var no = Convert.ToInt32(noStr);
+            base.Run();
+            var no= AskForInt("Hvilket nr vil du slette? ");
             var index = no - 1;
             _todo.Delete(index);
         }

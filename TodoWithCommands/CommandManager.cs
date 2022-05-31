@@ -4,7 +4,7 @@ namespace TodoWithCommands
 {
     internal class CommandManager
     {
-        public static ICommand? Find(string cmdNoStr, ICommand?[] commands)
+        public static Command? Find(string cmdNoStr, Command?[] commands)
         {
             var cmdNo = Convert.ToInt32(cmdNoStr);
             foreach (var command in commands)

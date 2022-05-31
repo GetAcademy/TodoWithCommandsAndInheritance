@@ -2,25 +2,21 @@
 
 namespace TodoWithCommands.Commands
 {
-    internal class AddTodoItemCommand : ICommand
+    internal class AddTodoItemCommand : Command
     {
         private readonly TodoManager _todo;
-        public int No { get; } = 1;
-        public string Description => $"{No} - legg til";
 
         public AddTodoItemCommand(TodoManager todo)
+            : base(1, "legg til")
         {
             _todo = todo;
         }
 
-        public void Run()
+        public override void Run()
         {
-            Console.WriteLine("Legg til");
-            Console.Write("Hvor mange dager til fristen? ");
-            var deadlineDaysStr = Console.ReadLine();
-            var deadlineDays = Convert.ToInt32(deadlineDaysStr);
-            Console.Write("Hva skal gjøres? ");
-            var text = Console.ReadLine();
+            base.Run();
+            var deadlineDays = AskForInt("Hvor mange dager til fristen? ");
+            var text = AskForString("Hva skal gjøres? ");
             var todoItem = new TodoItem(text, DateTime.Now.AddDays(deadlineDays));
             _todo.Add(todoItem);
         }

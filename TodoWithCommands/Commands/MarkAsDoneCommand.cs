@@ -7,25 +7,22 @@ using TodoWithCommands.Model;
 
 namespace TodoWithCommands.Commands
 {
-    internal class MarkAsDoneCommand : ICommand
+    internal class MarkAsDoneCommand : Command
     {
         private readonly TodoManager _todo;
-        public int No { get; } = 3;
-        public string Description => $"{No} - marker som gjort";
-
+ 
         public MarkAsDoneCommand(TodoManager todo)
+            : base(3, "marker som utført")
         {
             _todo = todo;
         }
 
-        public void Run()
+        public override void Run()
         {
-            Console.Write("Hvilket nr vil du sette som utført? ");
-            var noStr = Console.ReadLine();
-            var no = Convert.ToInt32(noStr);
+            base.Run();
+            var no = AskForInt("Hvilket nr vil du sette som utført? ");
             var index = no - 1;
             _todo.MarkAsDone(index);
         }
-
     }
 }
